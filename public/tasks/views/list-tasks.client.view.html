@@ -1,0 +1,243 @@
+<section data-ng-controller="TasksController" data-ng-init="find()">
+
+
+<div id="all_holder" style="margin-left:300px; margin-right:300px;" class="row">
+
+
+
+    <div data-ng-show="!tasks || tasks.length" >
+
+      <div id="left_menu" class="col-xs-6 col-sm-3 " style="margin-top: 50px;" >
+
+            
+             <strong>项目</strong>
+              <div ng-repeat="task in tasks| unique: 'project' |orderBy:'project'">
+     
+                 <span><a  data-ng-href="#!/tasks?project={{task.project}}" data-ng-bind="task.project "> 
+                 </a></span> 
+              </div>
+          
+
+
+            <br/><br/>
+            <strong>优先级</strong>
+             
+               <div  ng-repeat="task in tasks| unique: 'priority'|orderBy:'priority' ">
+               <span><div id="square-{{task.priority}}" style="float:left"></div></span>
+
+                 <span style="text-align:justify;"><a  data-ng-href="#!/tasks?priority={{task.priority}}" data-ng-bind="task.priority">
+                 </a></span>
+              </div>
+              
+             
+
+              <br/><br/>
+           
+          <strong>标签</strong>
+         
+         
+
+
+            <div ng-repeat="tag in tasks|generateTagsFromTasks">
+
+            <span><a data-ng-href="#!/tasks?tag={{tag}}">{{tag|hideAtSymbolInTag}}</a></span>
+            </div>
+         
+       </div>
+
+      </div>
+
+
+<!-- right content -->
+  <div id="content" class="col-md-9" 
+        style="min-height:800px;background-color: white;">
+    
+
+
+  <div  >
+  <br><br>
+  <form data-ng-submit="create()" novalidate>
+ 
+    <div>
+      <label for="content">创建新的任务</label>
+      <div>
+        <input type="text" data-ng-model="content" id="content"  required  placeholder=""> 
+        <input type="date" data-ng-model="dueDate" id="dueDate"   placeholder="no due Date"> 
+
+         
+
+
+      </div>
+    </div>
+    
+
+
+
+    <div>
+      <input type="submit" value="提交">
+    </div>
+    <div data-ng-show="error">
+      <strong data-ng-bind="error"></strong>
+    </div>
+  </form>
+
+  </div>
+ 
+  
+
+  <div data-ng-hide="!tasks || tasks.length">
+
+   <div   style="margin-top:100px; "  >
+     <h3 class="text-info">还没有任务，通过上面的输入框创建新任务。</h3>
+   </div>
+
+  </div>
+
+
+
+
+        
+ 
+
+
+
+<br/><br/>
+
+
+    <div data-ng-show="!tasks || tasks.length">
+
+
+      <table class="table   table-hover table-condensed">
+
+           <thead>
+            <tr>
+                <th><small><a data-ng-href="/#!/tasks">              
+                  <span class="glyphicon glyphicon-home" aria-hidden="true"></span>  
+                </a></small>
+                
+                </th>
+               <th>我的任务</th>
+               <th>计划日期</th>
+            </tr>
+        </thead>
+        <tbody>
+           <tr data-ng-repeat="task in tasks|filter:{isDone:false}"  class="done-{{task.isDone}}">
+             <td class="checker" style="width:10px;">
+             <input type="checkbox"   ng-model="task.isDone"  ng-click="onComplteTodo(task)">
+             </td>
+
+             <td class="task_content"  >
+
+
+                <div class="task_content_item" >
+                  <span><a data-ng-href="#!/tasks/{{task._id}}/edit" >
+                    <div id="square-{{task.priority}}" style="float:left">
+                      
+                    </div>
+                    </a>
+                  </span>
+                  <span class="done-{{task.isDone}}"> 
+                
+                  
+                  <!-- {{task.content}}  -->
+                   <div ng-bind-html="task.content|convertToMarkdown"></div>
+
+                   </span>
+                </div>
+
+
+                   <div class="labels_holder"  ng-repeat="tag in task.tags" style="float:left; width:80px;">
+                      <small > 
+                      <a  style="color:#555555" data-ng-href="#!/tasks?tag={{tag.name}}">{{tag.name|hideAtSymbolInTag}}</a>
+                      </small>
+                  </div>
+                 
+               </td>
+
+
+            <td style="width:150px;">
+                <div class="div_due_date"  >
+                  <small ng-hide="task.isDone" > {{ task.dueDate| date:'mediumDate'}} </small>
+                </div>
+            </td>
+            </tr>
+          </tbody>
+
+        </table>
+
+
+
+
+
+
+<br/><br/>
+
+      <table class="table    table-condensed">
+
+           <thead>
+            <tr>
+                <th></th>
+               <th>已完成任务</th>
+               <th>计划日期</th>
+            </tr>
+        </thead>
+        <tbody>
+           <tr data-ng-repeat="task in tasks|filter:{isDone:true}|orderBy:'doneDate':true|limitTo:10 "  class="done-{{task.isDone}}">
+             <td class="checker" style="width:20px;"  >
+
+             
+             <input type="checkbox"   ng-model="task.isDone"  ng-click="onComplteTodo(task)">
+
+
+             </td>
+
+             <td class="task_content"  >
+
+
+                <div class="task_content_item" >
+                  <span><div id="square-{{task.priority}}" style="float:left"></div></span>
+                  <span ><a data-ng-href="#!/tasks/{{task._id}}/edit"   class="done-{{task.isDone}}" >{{task.content}} </a></span>
+                </div>
+
+
+                   <div class="labels_holder"  ng-repeat="tag in task.tags" style="float:left; width:50px;">
+                      <small > <a  style="color:#555555" data-ng-href="#!/tasks?tag={{tag.name}}">{{tag.name|hideAtSymbolInTag}}</a></small>
+                  </div>
+                 
+               </td>
+
+
+            <td style="width:150px;">
+                <div class="div_due_date"  >
+                  <small data-ng-bind="task.dueDate| date:'mediumDate' "  ng-hide="task.isDone" ></small>
+                </div>
+            </td>
+            </tr>
+          </tbody>
+
+        </table>
+
+
+
+
+     
+        </div>
+     
+ 
+
+ 
+
+
+
+</div>
+
+
+
+
+ 
+
+
+
+ 
+   
+</section>

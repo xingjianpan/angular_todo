@@ -1,0 +1,42 @@
+{
+	"firstName":"xingjian",
+	"lastName":"pan",
+	"username":"xingjianpan",
+	"email":"xingjianpan@163.com",
+	"role":"Admin",
+	"password":"123456"
+}
+
+
+
+{
+"content":"test task1",
+"dueDate":"2013-1-1",
+"isDone":true,
+"doneDate":"2014-1-1",
+ 
+ 
+ "tags":[
+		{"name":"tag1"},
+		{"name":"tag2"}
+       ],
+
+ "project": "work",
+ "priority":3
+
+}
+
+
+ 
+
+
+{
+"content":"good",
+"tags":[ 
+		{"name":"tag1"}] 
+	 
+        
+}
+
+
+ 

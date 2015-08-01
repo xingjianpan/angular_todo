@@ -1,0 +1,87 @@
+<section data-ng-controller="TasksController" data-ng-init="findOne()">
+
+
+
+<div id="all_holder" style="margin-left:500px; margin-top:50px;" class="row">
+
+
+
+
+  <h3>编辑任务</h3>
+  <form data-ng-submit="update()" novalidate>
+ 
+    <div>
+      <label for="rawContent">任务内容</label>
+      <div>
+        <textarea data-ng-model="task.rawContent" id="rawContent"  placeholder="rawContent" rows="4" cols="50"></textarea>
+      </div>
+    </div>
+
+
+
+    <div>
+      <label for="dueDate">计划日期</label>
+      <div>
+        <input type="date" data-ng-model="task.dueDate" id="dueDate"  placeholder="dueDate">
+      </div>
+    </div>
+
+ 
+    <div>
+      <label for="isDone">已完成?</label>
+      <div>
+        <input type="checkbox" data-ng-model="task.isDone" id="isDone"  placeholder="isDone">
+      </div>
+    </div>
+ 
+
+
+    <div>
+      <label for="priority">Priority</label>
+      <div>
+        <input type="number" min="1" max="4" data-ng-model="task.priority" id="priority"  placeholder="priority">
+      </div>
+    </div>
+
+
+ 
+    <div>
+      <label for="project">项目</label>
+      <div>
+        <input type="text" data-ng-model="task.project" id="project"  placeholder="project">
+      </div>
+    </div>
+
+
+ 
+ 
+
+
+
+    <div>
+      <input type="submit" value="提交">
+    </div>
+    <div data-ng-show="error">
+      <strong data-ng-bind="error"></strong>
+    </div>
+ 
+  </form>
+
+
+
+
+<!-- testing purpose -->
+<!-- <pre>
+
+{{task}}
+</pre> -->
+
+<!-- testing purpose -->
+  
+  <span><a href="/#!/tasks">返回我的任务</a></span>
+
+ 
+</div>
+
+
+</section>

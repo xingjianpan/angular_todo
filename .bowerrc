@@ -1,0 +1,9 @@
+{
+  "directory": "public/lib",
+  "proxy":"",
+  "https-proxy":"",
+  "strict-ssl": false
+}
+
+
+	

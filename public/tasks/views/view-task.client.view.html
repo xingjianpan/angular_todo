@@ -1,0 +1,58 @@
+<section data-ng-controller="TasksController" data-ng-init="findOne()">
+
+ 
+
+  <h1 data-ng-bind="task.content"></h1>
+
+  <span>Due Date: </span><u data-ng-bind="task.dueDate | date:'mediumDate'"></u>
+
+  <span>Done: </span><u data-ng-bind="task.isDone  "></u>
+  <br>
+
+  <span>Priority: </span><strong data-ng-bind="task.priority"></strong>
+
+<span>Project: </span><strong data-ng-bind="task.project"></strong>
+
+
+<br>
+<span>Tags: </span>
+
+<ul>
+ <li ng-repeat="tag in task.tags"><u>{{tag.name}}</u></li>
+</ul>
+ 
+
+
+
+
+
+  <div data-ng-show="authentication.user._id == task.creator._id">
+    <a href="/#!/tasks/{{task._id}}/edit">edit</a>
+    <!-- 注意href="#!" 如果漏掉"!"会报错 -->
+    <a href="#!" data-ng-click="delete()">delete</a>
+  </div>
+  <small>
+    <em>Posted on</em>
+    <em data-ng-bind="task.created | date:'mediumDate'"></em>
+    <em>by</em>
+    <em data-ng-bind="task.creator.fullName"></em>
+  </small>
+  <p data-ng-bind="article.content"></p>
+
+
+
+    
+<!--  
+<pre>
+
+{{task}}
+
+ 
+</pre> -->
+  
+   
+  <span><a href="/#!"> Go back home</a></span>
+ 
+
+ 
+</section>

@@ -1,0 +1,53 @@
+ 
+ html, body   
+ {    
+  font-family: "Microsoft YaHei" ! important; 
+  width: 100%;
+  margin: 0;
+} 
+
+
+ code {
+   font-family: "Consolas" ! important; 
+} 
+
+
+
+.done-true {
+  text-decoration: line-through;
+  color: #ddd;
+   
+}
+ 
+
+
+ 
+
+#square-1 {
+	width: 15px;
+	height: 15px;
+	background: #d24726;
+ 	margin-right: 5px;
+}
+
+#square-2 {
+	width: 15px;
+	height: 15px;
+	background: #0063a6;
+	 margin-right: 5px;
+}
+
+#square-3 {
+	width: 15px;
+	height: 15px;
+	background: #76c6ff;
+	margin-right: 5px; 
+}
+
+#square-4 {
+	width: 15px;
+	height: 15px;
+	background: #a5a9ab;
+	margin-right: 5px;
+	 
+}
